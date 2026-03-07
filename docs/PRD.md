@@ -71,7 +71,7 @@ A Block is a named, shared container that aggregates all communication and work 
 - Members — teammates explicitly invited by the creator
 - All Slack messages and threads associated with this Block
 - All Jira tickets linked to this Block, including title, description, acceptance criteria, status, assignee, and comments
-- All Google Docs linked to this Block, listed with title, last edited date, and open comment count. Clicking opens the doc in Google Docs
+- All Google Docs linked to this Block, listed with title, last edited date, and open comment count. Google Doc body text is cached in full and available to the AI for context, summaries, and chat. Clicking opens the doc in Google Docs
 - All Gmail threads tagged to this Block
 - A running AI-generated decision log: key outcomes from past conversations, one sentence each, updated automatically
 - Open items: unresolved questions or threads still waiting for action
@@ -236,7 +236,7 @@ The user has everything they need to act before opening the drawer. Most items c
 ### Focus Mode
 
 - User activates Focus Mode manually; calendar sync available in V2
-- FocusBlock updates the user's status: "[Name] is in focus mode until [time]."
+- FocusBlock updates the user's status in Slack: "[Name] is in focus mode until [time]."
 - All action required and FYI items are held — Feed goes quiet
 - Blocking items always break through with full context pre-loaded
 - When focus mode ends, held items are released into the Feed in urgency + Block priority order, not a time-ordered flood
@@ -396,7 +396,7 @@ The Feed-level chat prompt is locked at the top of the Feed, always visible abov
 
 ### Block-Level Chat
 
-Block-level chat is scoped to a single Block and has access to its complete history: all Signals, all Cues, the decision log, linked Jira ticket descriptions and comments, and Google Doc, including comment threads.
+Block-level chat is scoped to a single Block and has access to its complete history: all Signals, all Cues, the decision log, linked Jira ticket descriptions and comments, and full Google Doc content including comment threads.
 
 It appears in two places:
 - **In the side panel** — a chat prompt between the AI summary paragraph and the Signal list, always visible when the side panel is open
@@ -449,6 +449,7 @@ FocusBlock is an integration-first product. All messages, comments, and document
 | Unassigned Queue (in Feed) | Low-confidence items surface in the Feed labeled Unassigned. User assigns, accepts AI suggestion, or creates a new Block. | P0 | Phase 1 |
 | AI-suggested new Blocks | AI detects clusters of unassociated activity and suggests a new Block directly in the Feed. | P0 | Phase 1 |
 | Full Jira context injection | Surfaces ticket title, description, acceptance criteria, status, and assignee — not just comments — on every Jira-linked item. | P0 | Phase 1 |
+| Full Google Doc context | When a Google Doc is linked to a Block, FocusBlock fetches and caches the full document body. The AI uses this content for Block-level chat, Signal summaries, and Reply with AI drafts — not just comments. Doc content is cached on link and refreshed in the background every 60 minutes with a live fallback if stale. | P0 | Phase 1 |
 | AI Urgency Triage | Blocking / action required / FYI classification for every message. Non-urgent items never interrupt a focus session. | P0 | Phase 1 |
 | AI Context Injection | Every Feed item prepends Block context, last decision, open items, and Jira ticket details. Zero reconstruction before responding. | P0 | Phase 1 |
 | Cross-tool reply | Replies sent in FocusBlock post natively back to the originating tool (Slack, Jira, Docs). | P0 | Phase 1 |
