@@ -119,12 +119,6 @@ read Blocks they are members of. OAuth tokens are encrypted before storage.
   and rationale
 
 
-**Build guides:**
-- [Part 1: Lovable UI](./build-guides/01-lovable-ui.md)
-- [Part 2: Integrations](./build-guides/02-integrations.md)
-- [Part 3: Backend](./build-guides/03-backend.md)
-
-
 ---
 
 
